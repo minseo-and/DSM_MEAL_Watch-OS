@@ -3,6 +3,10 @@ package com.example.dsm_meal_watch_os
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ScrollView
+import com.example.dsm_meal_watch_os.data.ApiClient
+import com.example.dsm_meal_watch_os.data.Meal
+import com.example.dsm_meal_watch_os.data.RetrofitService
 import com.example.dsm_meal_watch_os.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,8 +49,22 @@ class MainActivity : Activity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        mealService()
+        btnCheck()
+
+
+
+        binding.btnNext.setOnClickListener {
+            if (urlTimes >= 3){
+                urlTimes = 1
+            } else urlTimes++
+            mealService()
+            btnCheck()
+            binding.scrollView.fullScroll(ScrollView.FOCUS_UP)
+        }
 
     }
+
 
     fun mealService() {
 
@@ -75,4 +93,17 @@ class MainActivity : Activity() {
             }
         })
     }
+
+    fun btnCheck() {
+        when (urlTimes) {
+            1 -> {
+                binding.btnNext.text = "아침"
+            }
+            2 -> {
+                binding.btnNext.text = "점심"
+            }
+            else -> binding.btnNext.text = "저녁"
+        }
+    }
+
 }
