@@ -81,7 +81,10 @@ class MainActivity : Activity() {
                         for (i in res.indices) {
                             val obj = res[i]
                             val str = obj.DDISH_NM.replace("<br/>", "\n")
-                            binding.tet.text = str
+                            if (str ==""){
+                                binding.tet.text = "급식이 없습니다."
+                            }
+                            else binding.tet.text = str
                         }
                     }
                 }
