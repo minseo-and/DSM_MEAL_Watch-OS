@@ -52,6 +52,7 @@ class MainActivity : Activity() {
         mealService()
         btnCheck()
 
+        binding.date.text = urlDays.toString()
 
 
         binding.btnNext.setOnClickListener {
